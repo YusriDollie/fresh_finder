@@ -71,20 +71,20 @@ const Sidebar = ({ accessToken }) => {
       name: "Top List",
     },
     {
-      id: "ambient",
-      name: "Ambient",
+      id: "focus",
+      name: "Focus",
     },
     {
-      id: "punk",
-      name: "Punk",
+      id: "metal",
+      name: "Metal",
     },
     {
       id: "rock",
       name: "Rock",
     },
     {
-      id: "hiphop",
-      name: "Hip Hop",
+      id: "jazz",
+      name: "Jazz",
     },
   ];
 
@@ -96,7 +96,7 @@ const Sidebar = ({ accessToken }) => {
 
     spotifyApi
       .getPlaylistsForCategory(categoryId, {
-        country: "IN",
+        country: "US",
         limit: 1,
         offset: offsetValue,
       })
@@ -119,7 +119,7 @@ const Sidebar = ({ accessToken }) => {
     spotifyApi.setAccessToken(accessToken);
 
     spotifyApi.getMySavedTracks({
-        limit : 20,
+        limit : 50,
         offset: 0
       })
       .then(function(data) {
@@ -132,6 +132,14 @@ const Sidebar = ({ accessToken }) => {
 
   }
   const handleHomePage = () => {
+    setLikedSong(null)
+    setPlaylist(null)
+    setCId("")
+  }
+
+    const handleDiscoverPage = () => {
+    if (!accessToken) return;
+    spotifyApi.setAccessToken(accessToken);
     setLikedSong(null)
     setPlaylist(null)
     setCId("")
@@ -171,10 +179,11 @@ const Sidebar = ({ accessToken }) => {
         title="Your Liked Songs"
         handleLikedSongs={handleLikedSongs}
       />
+       <SidebarOption id="Discover" Icon={MusicNoteIcon} title="Discover" handleHomePage={handleDiscoverPage} />
 
       {playlist !== null && (
         <>
-          <p> &emsp; Suffle Between Different Playlists!😉 </p>
+          <p> &emsp; Shuffle Between Different Playlists!😉 </p>
           <div className={classes.buttons}>
             <ButtonGroup
               size="small"

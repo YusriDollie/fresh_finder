@@ -1,2 +1,2 @@
 # fresh_finder
-A Spotify Playlist Filtering tool
+A learning experience in JavaScript and react to replicate a basic Spotify webplayer
